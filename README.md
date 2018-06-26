@@ -225,6 +225,7 @@ Create a Lambda Function from the AWS Lambda page.
 2.	Select Node.js 8.10 under Runtime
 3.	Under Role, select “Create a custom role” option
 4.	Save the custom role “lambda_execution” by clicking on “Allow” button
+![lambda](https://user-images.githubusercontent.com/4006576/41895928-dc273c3a-7940-11e8-8717-0cde92dd35ce.png)
 5.	Click on “Create function” 
 6.	Under Designer, select Add triggers > CloudWatch Events
 7.	Click on the “Configuration required” link under the CloudWatch Events trigger to configure the triggers
