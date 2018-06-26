@@ -2,7 +2,7 @@
 The purpose of this content is to give a high-level overview of configuring AWS Cloud Ecosystem to automatically register and deregister EC2 Instance information into TCPWave IPAM and private DNS and to ftp the CSV of the consolidated state changes that have taken place in the specified number of hours till the current time.
 # 2. Architecture Overview
 
-![alt text](screenshots/architecture-diagram.png "Description goes here")
+![architecture-diagram](https://user-images.githubusercontent.com/4006576/41895756-78bff826-7940-11e8-9ea4-df6e7ca80c5b.png)
 
 Architectural diagram provided above depicts the flow of events happening from AWS EC2 system to TCPWave IPAM and External Server using TCPWave DDI automation solution. Below is the description of the events.
 1.	AWS EC2 instance state change will invoke preconfigured Lambda function through AWS CloudWatch event listener.
