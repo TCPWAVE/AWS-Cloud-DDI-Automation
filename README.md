@@ -334,4 +334,4 @@ Please refer to ‘Variables’ and ‘Custom Tags’ sections provided above to
 ![cloudwatch](https://user-images.githubusercontent.com/4006576/41896120-63026ed2-7941-11e8-8220-af60752b3f34.png)
 
 # 6. Conclusion
-By adhering the steps discussed in the above article users can seamlessly integrate AWS Cloud Management into TCPWave IPAM to automate DDI in Private DNS or send the state details CSV to external server.
+By adhering to the steps discussed in the above article users can seamlessly integrate AWS Cloud Management into TCPWave IPAM to automate DDI in Private DNS or send the state details CSV to external server.
