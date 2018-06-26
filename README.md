@@ -268,7 +268,8 @@ Create a Lambda Function from the AWS Lambda page.
         
         2.	Open the role ‘lambda_execution’ created in step 4.
         
-        3.	Attach policies: AmazonEC2ReadOnlyAccess and AWSLambdaVPCAccessExecutionRole to the role. 
+        3.	Attach policies: AmazonEC2ReadOnlyAccess and AWSLambdaVPCAccessExecutionRole to the role. The role should look as below.
+ ![lambda1](https://user-images.githubusercontent.com/4006576/41896082-50d1363a-7941-11e8-90e0-b1bb8b2049df.png)
         
 26.	Updating CloudWatch Rule.
 
@@ -285,6 +286,14 @@ Create a Lambda Function from the AWS Lambda page.
         "<instance> <state>"
         
         6.	Click on Configure Details button on the bottom right corner of the page.
+        
+CloudWatch rule should look as below.
+
+![lambda2](https://user-images.githubusercontent.com/4006576/41896091-553ff1b6-7941-11e8-90ce-657c41798bde.png)
+
+Lambda function should look as below.
+
+![lambda3](https://user-images.githubusercontent.com/4006576/41896108-5bb0572a-7941-11e8-96d0-ba50e0d3d6ae.png)
         
 After the above configuration is completed successfully, Rest API on TCPWave IPAM will be invoked on EC2 instance state change.  Object will be created in the IPAM when the instance state changes to Running. And object will be deleted from IPAM when the instance is Terminated or Stopped.
 
@@ -312,11 +321,17 @@ After the above configuration is completed successfully, Rest API on TCPWave IPA
 1.	Create Lambda function by uploading the below zip file. Update the ftp parameters and the file path in index.js according to the ftp server details. Update the value of the parameter ‘rotationDuration’ as per the requirement. Default value is 24 hours.
 Please refer to ‘Variables’ and ‘Custom Tags’ sections provided above to know more information about other variables.
 2.	Increase the timeout value to avoid timeout issue because of network latency.
-3.	Assign execution role to the function which has below policies attached to it.
-AmazonEC2ReadOnlyAccess, AmazonDynamoDBFullAccess and AWSLambdaVPCAccessExecutionRole.
+3.	Assign execution role to the function which has below policies attached to it. AmazonEC2ReadOnlyAccess, AmazonDynamoDBFullAccess and AWSLambdaVPCAccessExecutionRole.
+
 **Steps to create DynamoDB table**
 1.	Go to DynamoDB service and create a table with name ‘ec2_state_change’ and Primary partition key as ‘timestamp’ with number as data type.
+
+![dynamodb](https://user-images.githubusercontent.com/4006576/41896118-5fcf032e-7941-11e8-9c5b-8868a32d5eee.png)
+
 **Steps to create CloudWatch event**
 1.	Go to CloudWatch service and create a Rule for ‘EC2 Instance State-change Notification’ and assign the Lambda function created in the above steps.
+
+![cloudwatch](https://user-images.githubusercontent.com/4006576/41896120-63026ed2-7941-11e8-8220-af60752b3f34.png)
+
 # 6. Conclusion
 By adhering the steps discussed in the above article users can seamlessly integrate AWS Cloud Management into TCPWave IPAM to automate DDI in Private DNS or send the state details CSV to external server.
