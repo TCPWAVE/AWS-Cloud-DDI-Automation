@@ -5,17 +5,18 @@ The purpose of this content is to give a high-level overview of configuring AWS 
 ![architecture-diagram](https://user-images.githubusercontent.com/4006576/41895756-78bff826-7940-11e8-9ea4-df6e7ca80c5b.png)
 
 Architectural diagram provided above depicts the flow of events happening from AWS EC2 system to TCPWave IPAM and External Server using TCPWave DDI automation solution. Below is the description of the events.
-1.	AWS EC2 instance state change will invoke preconfigured Lambda function through AWS CloudWatch event listener.
-2.	Lambda function will invoke TCPWave IPAM’s Rest API though SSL authentication with the required instance details it gets from aws-sdk EC2 API, to create or delete object in TCPWave IPAM.
-3.	TCPWave IPAM will send DDNS updates to internal DNS appliances and Cloud DNS eco system.
-4.	DDI Automation solution provides another Lambda function to configure to CloudWatch event which will send consolidated CSV of the events that have taken place on AWS EC2 instances in the last 24 hours, to external server through FTP. Sample CSV is given below.
-(Add/Delete IP Name TimeStamp)
-Delete 172.31.0.183 TEST-LAMBDA (Wed Jun 06 2018 07:09:52 GMT+0000 (UTC))
-       Add 172.31.0.164 jahn-linux (Wed Jun 06 2018 07:37:32 GMT+0000 (UTC))
-       Delete 172.31.0.33 ip-172-31-0-33 (Wed Jun 06 2018 08:44:22 GMT+0000 (UTC))
+1.	AWS EC2 instance state change invokes preconfigured Lambda function through AWS CloudWatch event listener.
+2.	Lambda function invokes TCPWave IPAM’s Rest API though SSL authentication with the required instance details it gets from aws-sdk EC2 API, to create or delete object in TCPWave IPAM.
+3.	TCPWave IPAM sends DDNS updates to internal DNS appliances and Cloud DNS eco system.
+4.	DDI Automation solution provides another Lambda function to configure to CloudWatch event which sends consolidated CSV of the events that have taken place on AWS EC2 instances in the last 24 hours, to external server through FTP. Sample CSV is given below.
 
-The CloudWatch Event Listener set up by the user tracks the instance state changes – such as running, stopped and terminated and invokes defined AWS Lambda Function. This function gets invoked whenever an instance state is changed. 
-The function then communicates with TCPWave IPAM using REST API to update the object information. When the state of an EC2 instance changes to “running”, the EC2 instance object is added to the TCPWave IPAM. When an EC2 instance is stopped or terminated, the EC2 instance object information gets deleted from the TCPWave IPAM via the AWS Lambda function.
+| Add/Delete | IP | Name | TimeStamp |
+|------------|----|------|-----------|
+| Delete | 172.31.0.183 | TEST-LAMBDA | (Wed Jun 06 2018 07:09:52 GMT+0000 (UTC)) |
+| Add | 172.31.0.164 | jahn-linux | (Wed Jun 06 2018 07:37:32 GMT+0000 (UTC)) |
+| Delete | 172.31.0.33 | ip-172-31-0-33 | (Wed Jun 06 2018 08:44:22 GMT+0000 (UTC)) |
+
+The CloudWatch Event Listener set up by the user tracks the instance state changes – such as running, stopped and terminated and invokes defined AWS Lambda Function. This function gets invoked whenever an instance state is changed. The function then communicates with TCPWave IPAM using REST API to update the object information. When the state of an EC2 instance changes to “running”, the EC2 instance object is added to the TCPWave IPAM. When an EC2 instance is stopped or terminated, the EC2 instance object information gets deleted from the TCPWave IPAM via the AWS Lambda function. Similarly other Lambda function mentioned in the event 4 sends CSV file to external server.
 
 # 3. Configuration Steps to send updates to TCPWave IPAM
 ## 3.1 Prepare zip file to upload to Lambda
@@ -318,7 +319,7 @@ After the above configuration is completed successfully, Rest API on TCPWave IPA
 
 # 5. Configuration Steps to send CSV to external server
 **Steps to create a Lambda function**
-1.	Create Lambda function by uploading the below zip file. Update the ftp parameters and the file path in index.js according to the ftp server details. Update the value of the parameter ‘rotationDuration’ as per the requirement. Default value is 24 hours.
+1.	Create Lambda function by uploading the send_csv_to_external_server_fn.zip file. Update the ftp parameters and the file path in index.js according to the ftp server details. Update the value of the parameter ‘rotationDuration’ as per the requirement. Default value is 24 hours.
 Please refer to ‘Variables’ and ‘Custom Tags’ sections provided above to know more information about other variables.
 2.	Increase the timeout value to avoid timeout issue because of network latency.
 3.	Assign execution role to the function which has below policies attached to it. AmazonEC2ReadOnlyAccess, AmazonDynamoDBFullAccess and AWSLambdaVPCAccessExecutionRole.
