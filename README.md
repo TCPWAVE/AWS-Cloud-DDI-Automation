@@ -336,3 +336,9 @@ Please refer to ‘Variables’ and ‘Custom Tags’ sections provided above to
 
 # 6. Conclusion
 By adhering to the steps discussed in the above article users can seamlessly integrate AWS Cloud Management into TCPWave IPAM to automate DDI in Private DNS or send the state details CSV to external server.
+
+# Assigning Elastic IP to Lambda function
+As AWS Lambda provides serverless computing, it doesn’t use static IP Address. So third-party services cannot whitelist the IP as it changes quite frequently. To solve this security concern below are the steps provided to assign a VPC with elastic IP to Lambda function. Once the below set up is done, all the traffic from Lambda service will be NAT’ed to the elastic IP Address. This elastic IP can be white listed by third party vendor.
+# Step1
+Head over to your AWS VPC dashboard and click on over to list of VPCs. Click on the Create VPC link and enter in a name and CIDR block for the VPC.
+
