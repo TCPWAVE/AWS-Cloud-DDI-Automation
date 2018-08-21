@@ -343,3 +343,72 @@ As AWS Lambda provides serverless computing, it doesn’t use static IP Address.
 Head over to your AWS VPC dashboard and click on over to list of VPCs. Click on the Create VPC link and enter in a name and CIDR block for the VPC.
 
 ![1](https://user-images.githubusercontent.com/4006576/44384723-bfd69f00-a53a-11e8-9cf5-659224697528.png)
+
+## Step2
+Go to the Subnets page and create two subnets. One public and one private as shown in below two screenshots.
+
+
+
+## Step3
+Head over to the Internet Gateway view, click on Create Internet Gateway and tag it with a descriptive tag.
+
+
+
+
+## Step4
+Then, click on new internet gateway, and click on Attach to VPC, to attach it to newly created VPC.
+
+
+
+
+
+## Step5
+Now head over to our Route Tables view and click on Create Route Table, giving it a descriptive tag and linking it to the VPC.
+
+
+
+## Step6
+Then edit this route to point it to new internet gateway. Click on the new route, click on the Routes tab, and click edit. Then add a new route, and set all traffic (0.0.0.0/0) to target our internet gateway and save it.
+
+
+
+
+## Step7
+Now, click on Subnet Associations tab, click edit and, by ticking the check box by your public subnet and clicking Save, you will associate this new route to your public subnet.
+
+
+
+
+## Step8
+First, take note of your public subnet’s id. Head over the NAT Gateway view and click on Create NAT Gateway. On the creation screen go ahead and paste in your subnet id and click on “Create New EIP.” Elastic IP will be created as below.
+
+
+
+
+## Step9
+On the confirmation screen copy nat instance id and go back and edit the default route created when new VPC is created. Click on the default route (you will see the Main column for that route says Yes), click on the Routes tab, and click edit. Then add a new route, and we will set all traffic (0.0.0.0/0) to target nat instance id and save it.
+
+
+## Step10
+Now, click on Subnet Associations tab, click edit and, by ticking the check boxes by public and private subnets and clicking Save, you will associate this new route to the subnets.
+
+
+
+## Step11
+Create new security group as below from Security groups page in EC2 service.
+
+
+
+## Step12
+Now, assign the newly created VPC, subnets and security group to the Lambda function as below.
+
+
+
+
+
+
+
+
+
+
+
