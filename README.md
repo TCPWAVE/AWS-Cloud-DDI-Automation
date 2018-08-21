@@ -346,6 +346,7 @@ Head over to your AWS VPC dashboard and click on over to list of VPCs. Click on 
 ## Step2
 Go to the Subnets page and create two subnets. One public and one private as shown in below two screenshots.
 ![2](https://user-images.githubusercontent.com/4006576/44385101-04af0580-a53c-11e8-9646-be6a5e10a68d.png)
+![3](https://user-images.githubusercontent.com/4006576/44385109-08db2300-a53c-11e8-9477-5447d2846eba.png)
 
 ## Step3
 Head over to the Internet Gateway view, click on Create Internet Gateway and tag it with a descriptive tag.
@@ -387,13 +388,4 @@ Create new security group as below from Security groups page in EC2 service.
 ## Step12
 Now, assign the newly created VPC, subnets and security group to the Lambda function as below.
 ![14](https://user-images.githubusercontent.com/4006576/44385155-26a88800-a53c-11e8-8572-11e6995b3c24.png)
-
-
-
-
-
-
-
-
-
 
