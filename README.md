@@ -349,33 +349,31 @@ Go to the Subnets page and create two subnets. One public and one private as sho
 
 ## Step3
 Head over to the Internet Gateway view, click on Create Internet Gateway and tag it with a descriptive tag.
-
+![4](https://user-images.githubusercontent.com/4006576/44385125-17c1d580-a53c-11e8-8c24-68505b1d3a53.png)
 
 ## Step4
 Then, click on new internet gateway, and click on Attach to VPC, to attach it to newly created VPC.
-![4](https://user-images.githubusercontent.com/4006576/44385125-17c1d580-a53c-11e8-8c24-68505b1d3a53.png)
 ![5](https://user-images.githubusercontent.com/4006576/44385129-1b555c80-a53c-11e8-84bc-440e7d404226.png)
-
+![6](https://user-images.githubusercontent.com/4006576/44385137-1e504d00-a53c-11e8-82ad-771dd878994c.png)
 
 ## Step5
 Now head over to our Route Tables view and click on Create Route Table, giving it a descriptive tag and linking it to the VPC.
-![6](https://user-images.githubusercontent.com/4006576/44385137-1e504d00-a53c-11e8-82ad-771dd878994c.png)
+![7](https://user-images.githubusercontent.com/4006576/44385147-24dec480-a53c-11e8-9993-d45d40f51969.png)
 
 ## Step6
 Then edit this route to point it to new internet gateway. Click on the new route, click on the Routes tab, and click edit. Then add a new route, and set all traffic (0.0.0.0/0) to target our internet gateway and save it.
-![7](https://user-images.githubusercontent.com/4006576/44385147-24dec480-a53c-11e8-9993-d45d40f51969.png)
+![8](https://user-images.githubusercontent.com/4006576/44385148-24dec480-a53c-11e8-8e82-42dc53cfca9e.png)
 
 ## Step7
 Now, click on Subnet Associations tab, click edit and, by ticking the check box by your public subnet and clicking Save, you will associate this new route to your public subnet.
-![8](https://user-images.githubusercontent.com/4006576/44385148-24dec480-a53c-11e8-8e82-42dc53cfca9e.png)
+![9](https://user-images.githubusercontent.com/4006576/44385149-25775b00-a53c-11e8-955c-8e8f2b5c8778.png)
 
 ## Step8
 First, take note of your public subnet’s id. Head over the NAT Gateway view and click on Create NAT Gateway. On the creation screen go ahead and paste in your subnet id and click on “Create New EIP.” Elastic IP will be created as below.
-![9](https://user-images.githubusercontent.com/4006576/44385149-25775b00-a53c-11e8-955c-8e8f2b5c8778.png)
+![10](https://user-images.githubusercontent.com/4006576/44385150-25775b00-a53c-11e8-809f-0be113354291.png)
 
 ## Step9
 On the confirmation screen copy nat instance id and go back and edit the default route created when new VPC is created. Click on the default route (you will see the Main column for that route says Yes), click on the Routes tab, and click edit. Then add a new route, and we will set all traffic (0.0.0.0/0) to target nat instance id and save it.
-![10](https://user-images.githubusercontent.com/4006576/44385150-25775b00-a53c-11e8-809f-0be113354291.png)
 ![11](https://user-images.githubusercontent.com/4006576/44385152-25775b00-a53c-11e8-982d-18dd76e6981d.png)
 
 ## Step10
